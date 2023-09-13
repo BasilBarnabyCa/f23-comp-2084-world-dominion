@@ -1,0 +1,27 @@
+@* Below is the mighty code block *@
+@{
+	ViewData["Title"] = "Departments";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+	<table class="table table-striped table-bordered table-hover">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Name</th>
+			</tr>
+		</thead>
+		<tbody>
+			@{
+				foreach (var deparment in Model) {
+					<tr>
+						<td>@deparment["ID"]</td>
+						<td>@deparment["Name"]</td>
+					</tr>
+				}
+			}
+		</tbody>
+	</table>
+</div>
