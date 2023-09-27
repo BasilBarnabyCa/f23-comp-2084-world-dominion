@@ -1,15 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WorldDominion.Models;
 
 namespace WorldDominion.Controllers
 {
-    public class DepartmentsController : Controller
+	public class DepartmentsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
@@ -34,7 +29,9 @@ namespace WorldDominion.Controllers
                 return NotFound();
             }
 
+			// ORM: Object Relational Mapping Like Eloquent in Laravel
             var department = await _context.Departments
+				.Include(department => department.Products.OrderBy(product => product.Name))
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (department == null)
             {

@@ -23,6 +23,8 @@
             @Html.DisplayFor(model => model.Description)
         </dd>
     </dl>
+
+	<partial name="~/Views/Shared/Products/_ProductsTablePartial.cshtml" model="Model.Products" />
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |

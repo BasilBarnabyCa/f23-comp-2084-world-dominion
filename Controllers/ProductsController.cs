@@ -48,6 +48,7 @@ namespace WorldDominion.Controllers
         public IActionResult Create()
         {
             ViewData["DepartmentId"] = new SelectList(_context.Departments, "Id", "Name");
+			ViewData["WeightUnit"] = new SelectList(Enum.GetValues(typeof(ProductWeightUnit)));
             return View();
         }
 
@@ -65,6 +66,7 @@ namespace WorldDominion.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["DepartmentId"] = new SelectList(_context.Departments, "Id", "Name", product.DepartmentId);
+			ViewData["WeightUnit"] = new SelectList(Enum.GetValues(typeof(ProductWeightUnit)));
             return View(product);
         }
 
@@ -82,6 +84,7 @@ namespace WorldDominion.Controllers
                 return NotFound();
             }
             ViewData["DepartmentId"] = new SelectList(_context.Departments, "Id", "Name", product.DepartmentId);
+			ViewData["WeightUnit"] = new SelectList(Enum.GetValues(typeof(ProductWeightUnit)));
             return View(product);
         }
 
@@ -118,6 +121,7 @@ namespace WorldDominion.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["DepartmentId"] = new SelectList(_context.Departments, "Id", "Name", product.DepartmentId);
+			ViewData["WeightUnit"] = new SelectList(Enum.GetValues(typeof(ProductWeightUnit)));
             return View(product);
         }
 
