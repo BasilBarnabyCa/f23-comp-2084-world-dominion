@@ -12,6 +12,7 @@ namespace WorldDominion.Components.ViewComponents
 				new MenuItem{ Controller = "Home", Action = "Index", Label = "Home" },
 				new MenuItem{ Controller = "Departments", Action = "Index", Label = "Departments" },
 				new MenuItem{ Controller = "Products", Action = "Index", Label = "Products" },
+				new MenuItem{ Controller = "Cart", Action = "Index", Label = "My Cart" },
 				new MenuItem{ Controller = "Home", Action = "Privacy", Label = "Privacy" },
 			};
 
