@@ -1,66 +1,70 @@
 @model WorldDominion.Models.Product
 
 @{
-    ViewData["Title"] = "Details";
+	ViewData["Title"] = "Details";
 }
 
 <h1>Details</h1>
 
 <div>
-    <h4>Product</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Image)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Image)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MSRP)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MSRP)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Weight)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Weight)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.WeightUnit)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.WeightUnit)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Department)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Department.Name)
-        </dd>
-    </dl>
+	<h4>Product</h4>
+	<hr />
+	<dl class="row">
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.Name)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Name)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.Description)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Description)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.Image)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Image)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.MSRP)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.MSRP)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.Weight)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Weight)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.WeightUnit)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.WeightUnit)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.Department)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Department.Name)
+		</dd>
+	</dl>
 </div>
 <div>
 	<form asp-controller="Carts" asp-action="AddToCart">
-        <input type="hidden" name="productId" value="@Model.Id">
-        <input type="number" name="quantity" step="1" min="1" max="999999" value="1">
-        <input type="submit" value="Add to Cart" class="btn btn-success">
-    </form>
-	
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+		<input type="hidden" name="productId" value="@Model.Id">
+		<input type="number" name="quantity" step="1" min="1" max="999999" value="1">
+		<input type="submit" value="Add to Cart" class="btn btn-success">
+	</form>
+
+	@if (User.IsInRole("Admin"))
+	{
+		<a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a>
+		<span>&nbsp;|&nbsp;</span>
+	}
+	<a asp-action="Index">Back to List</a>
 </div>

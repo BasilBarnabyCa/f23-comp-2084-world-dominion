@@ -1,5 +1,5 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using MySql.Data.MySqlClient;
 using WorldDominion.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,6 +21,14 @@ builder.Services.AddSession(options =>
 	options.Cookie.IsEssential = true;
 });
 
+// Add Identity service and roles
+builder.Services.AddDefaultIdentity<IdentityUser>()
+	.AddRoles<IdentityRole>()
+	.AddEntityFrameworkStores<ApplicationDbContext>();
+
+// Add seeder
+builder.Services.AddTransient<DbInitializer>();
+
 var app = builder.Build();
 
 // Turn on sessions
@@ -39,6 +47,8 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+// Turns on authentication and authorization
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
@@ -59,5 +69,15 @@ app.MapControllerRoute(
 app.MapControllerRoute(
 	name: "default",
 	pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapRazorPages();
+
+var scopeFactory = app.Services.GetRequiredService<IServiceScopeFactory>();
+using var scope = scopeFactory.CreateScope();
+var initializer = scope.ServiceProvider.GetRequiredService<DbInitializer>();
+await DbInitializer.Initialize(
+    scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>(),
+    scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>()
+);
 
 app.Run();
