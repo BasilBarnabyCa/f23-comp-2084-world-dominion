@@ -29,6 +29,13 @@ builder.Services.AddDefaultIdentity<IdentityUser>()
 // Add seeder
 builder.Services.AddTransient<DbInitializer>();
 
+builder.Services.AddAuthentication()
+	.AddGoogle(options =>
+	{
+		options.ClientId = builder.Configuration["Authentication:Google:ClientId"];
+		options.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
+	});
+
 var app = builder.Build();
 
 // Turn on sessions
@@ -76,8 +83,8 @@ var scopeFactory = app.Services.GetRequiredService<IServiceScopeFactory>();
 using var scope = scopeFactory.CreateScope();
 var initializer = scope.ServiceProvider.GetRequiredService<DbInitializer>();
 await DbInitializer.Initialize(
-    scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>(),
-    scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>()
+	scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>(),
+	scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>()
 );
 
 app.Run();
