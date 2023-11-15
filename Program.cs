@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WorldDominion.Models;
+using WorldDominion.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +29,9 @@ builder.Services.AddDefaultIdentity<IdentityUser>()
 
 // Add seeder
 builder.Services.AddTransient<DbInitializer>();
+
+// Register Cart Service as a new scoped dependency
+builder.Services.AddScoped<CartService>();
 
 var app = builder.Build();
 
