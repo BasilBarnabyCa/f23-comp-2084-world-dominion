@@ -241,7 +241,7 @@ namespace WorldDominion.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<bool>("PaymentMethod")
+                    b.Property<bool>("PaymentReceived")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<decimal>("Total")

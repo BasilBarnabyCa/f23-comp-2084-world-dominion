@@ -11,8 +11,8 @@ using WorldDominion.Models;
 namespace WorldDominion.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231115204536_AddOrderAndOrderItem")]
-    partial class AddOrderAndOrderItem
+    [Migration("20231116004810_AddOrdersAndOrderItems")]
+    partial class AddOrdersAndOrderItems
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -244,7 +244,7 @@ namespace WorldDominion.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<bool>("PaymentMethod")
+                    b.Property<bool>("PaymentReceived")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<decimal>("Total")
@@ -276,6 +276,9 @@ namespace WorldDominion.Migrations
                     b.Property<string>("ProductName")
                         .IsRequired()
                         .HasColumnType("longtext");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

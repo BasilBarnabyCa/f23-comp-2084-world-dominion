@@ -15,7 +15,7 @@ namespace WorldDominion.Models
 		[DataType(DataType.Currency)]
 		public decimal Total {get; set;} = 0.00M;
 
-		public bool PaymentMethod {get; set;} = false;
+		public bool PaymentReceived {get; set;} = false;
 
 		public IdentityUser User {get; set;} = new IdentityUser();
 
