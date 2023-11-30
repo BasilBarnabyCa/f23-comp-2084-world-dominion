@@ -33,6 +33,9 @@ builder.Services.AddTransient<DbInitializer>();
 // Register Cart Service as a new scoped dependency
 builder.Services.AddScoped<CartService>();
 
+// Adding a singleton for the configuration (appsettings.development.json)
+builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
+
 var app = builder.Build();
 
 // Turn on sessions

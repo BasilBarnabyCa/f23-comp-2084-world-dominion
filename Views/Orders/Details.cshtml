@@ -61,4 +61,14 @@
 			</tfoot>
 		</table>
 	}
+</div> 
+
+<div>
+	@if(!Model.PaymentReceived)
+	{
+		<form asp-action="ProcessPayment">
+			<button class="btn btn-success">Proceed to Payment</button>
+		</form>
+		<a asp-action="Index">Back to list</a>
+	}
 </div>

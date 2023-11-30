@@ -25,5 +25,10 @@ namespace WorldDominion.Services
 
 			_httpContextAccessor.HttpContext.Session.SetString(_cartSessionKey, cartJson);
 		}
+
+		public void DestroyCart()
+		{
+			_httpContextAccessor.HttpContext.Session.Remove(_cartSessionKey);
+		}
 	}
 }

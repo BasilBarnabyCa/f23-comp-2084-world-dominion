@@ -17,7 +17,7 @@ namespace WorldDominion.Models
 
 		public bool PaymentReceived {get; set;} = false;
 
-		public IdentityUser User {get; set;} = new IdentityUser();
+		public IdentityUser? User {get; set;}
 
 		public virtual ICollection<OrderItem> OrderItems {get; set;} = new List<OrderItem>();
 		
