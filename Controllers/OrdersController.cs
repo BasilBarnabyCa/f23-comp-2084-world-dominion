@@ -25,7 +25,7 @@ namespace WorldDominion.Controllers
 		}
 
 		[Authorize()]
-		public IActionResult Index()
+		public async Task<IActionResult> Index()
 		{
 			var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 			
@@ -34,7 +34,7 @@ namespace WorldDominion.Controllers
 				return NotFound();
 			}
 
-			var orders = _context.Orders
+			var orders = await _context.Orders
 				.Include(order => order.OrderItems)
 				.Include(order => order.User)
 				.Where(order => order.UserId == userId)
